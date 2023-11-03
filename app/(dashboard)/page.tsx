@@ -1,9 +1,13 @@
 import React from 'react'
 
-const page = () => {
+export default function Home() {
   return (
-    <div>page</div>
+    <div className='container pt-4'>
+      Home
+    </div>
   )
 }
 
-export default page
+function CardStatsWrapper() {
+
+}
