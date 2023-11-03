@@ -9,7 +9,7 @@ const Layout = ({ children }: PropsWithChildren) => {
             <nav className='flex justify-between items-center border-b border-border h-[60px] px-4 py-2'>
                 <Logo />
                 <div className='flex gap-4 items-center'>
-                    <span className='font-bold italic select-none'>Set Theme :</span>
+                    <span className='font-bold text-lg select-none'>Theme :</span>
                     <ThemeSwitcher />
                     <UserButton afterSignOutUrl='/sign-in' />
                 </div>
