@@ -61,3 +61,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.bg-svg {
+  background: url(/bg-svg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
