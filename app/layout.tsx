@@ -27,7 +27,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="flex items-center justify-center">
+              {children}
+            </div>
             <Toaster />
           </ThemeProvider>
         </body>

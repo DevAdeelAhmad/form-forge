@@ -1,4 +1,5 @@
 import { GetFormById } from '@/actions/form';
+import Builder from '@/components/Builder';
 import React from 'react'
 
 async function BuilderPage({ params }: { params: { id: string } }) {
@@ -8,7 +9,7 @@ async function BuilderPage({ params }: { params: { id: string } }) {
         throw new Error("Form not found");
     }
     return (
-        <FormBuilder form={form} />
+        <Builder form={form} />
     )
 }
 
