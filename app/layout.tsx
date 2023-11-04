@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from "@/components/ui/toaster"
+import DesignerContextProvider from "@/components/DesignerContext"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,17 +22,19 @@ export default function RootLayout({
     <ClerkProvider>
       <html suppressHydrationWarning lang="en">
         <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <div className="flex items-center justify-center">
-              {children}
-            </div>
-            <Toaster />
-          </ThemeProvider>
+          <DesignerContextProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <div className="flex items-center justify-center">
+                {children}
+              </div>
+              <Toaster />
+            </ThemeProvider>
+          </DesignerContextProvider>
         </body>
       </html>
     </ClerkProvider>
