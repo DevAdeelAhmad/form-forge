@@ -1,7 +1,5 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { SignIn } from "@clerk/nextjs";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export default function Page() {
     const portfolioLink = 'https://adeelahmad.vercel.app/';
