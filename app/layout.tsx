@@ -9,8 +9,8 @@ import DesignerContextProvider from "@/components/DesignerContext"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Form Builder',
-  description: 'Form Builder by DevAdeelAhmad',
+  title: 'Form Forge by DevAdeel',
+  description: 'Craft customized forms effortlessly with FormForge, your go-to platform for creating, designing, and sharing web forms. No tutorials needed!',
 }
 
 export default function RootLayout({
