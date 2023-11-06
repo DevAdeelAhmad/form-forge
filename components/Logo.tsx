@@ -8,7 +8,7 @@ const Logo = () => {
     return (
         <div className='flex items-center justify-center gap-x-3'>
             <Link href='/' className='font-bold text-2xl sm:text-3xl bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text hover:cursor-pointer select-none'>
-                PageForm
+                FormForge
             </Link>
             <div className='hidden md:flex'>
                 <span className='select-text'>by&nbsp;</span>

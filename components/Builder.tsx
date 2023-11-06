@@ -31,7 +31,8 @@ function Builder({ form }: { form: Form }) {
                         )}
                     </div>
                 </nav>
-                <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+                {/* h-[120px] removed from below div*/}
+                <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
                     <Designer />
                 </div>
             </main>

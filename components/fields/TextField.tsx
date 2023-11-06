@@ -95,7 +95,7 @@ function PropertiesComponent({ elementInstance }: { elementInstance: FormElement
                                     e.currentTarget.blur();
                                 }
                             }} />
-                        </FormControl>
+                       </FormControl>
                         <FormDescription>
                             The label of the Field. <br /> It will be displayed above the field.
                         </FormDescription>
