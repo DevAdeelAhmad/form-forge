@@ -18,7 +18,7 @@ const extraAttributes = {
     label: "Text Field",
     helperText: "Helper Text",
     required: false,
-    placeHolder: "Enter Here..."
+    placeholder: "Enter Here..."
 }
 
 const propertiesSchema = z.object({
@@ -48,12 +48,12 @@ type CustomInstance = FormElementInstance & {
 
 function DesignerComponent({ elementInstance }: { elementInstance: FormElementInstance }) {
     const element = elementInstance as CustomInstance
-    const { label, required, placeHolder, helperText } = element.extraAttributes;
+    const { label, required, placeholder, helperText } = element.extraAttributes;
     return (
         <div className="flex flex-col gap-2 w-full">
-            <Label>{label}{required && "*"}
+            <Label className="flex items-start gap-2">{label}{required && <p className="text-xs text-muted-foreground">*mandatory</p>}
             </Label>
-            <Input readOnly disabled placeholder={placeHolder} />
+            <Input readOnly disabled placeholder={placeholder} />
             {helperText && <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>}
         </div>
     )
@@ -69,7 +69,7 @@ function PropertiesComponent({ elementInstance }: { elementInstance: FormElement
     const form = useForm<propertiesFormSchemaType>({
         resolver: zodResolver(propertiesSchema),
         mode: "onBlur",
-        defaultValues: { label, helperText, required, placeholder, }
+        defaultValues: { label, helperText, required, placeholder }
     })
 
     useEffect(() => {
@@ -80,7 +80,7 @@ function PropertiesComponent({ elementInstance }: { elementInstance: FormElement
         const { label, helperText, placeholder, required } = values;
         updateElement(element.id, {
             ...element,
-            extraAttributes: { label, helperText, placeholder, required, }
+            extraAttributes: { label, helperText, required, placeholder }
         })
     }
     return (
