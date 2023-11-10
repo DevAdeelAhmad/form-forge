@@ -10,7 +10,7 @@ import { DesignerElementWrapper } from './DesignerElementWrapper'
 
 function Designer() {
 
-  const { elements, addElement, selectedElement, setSelectedElement } = useDesigner();
+  const { elements, addElement, selectedElement, setSelectedElement, removeElement } = useDesigner();
   const droppable = useDroppable({
     id: "designer-drop-area",
     data: {
@@ -43,7 +43,7 @@ function Designer() {
         const overId = over.data?.current?.elementId;
         const overElementIndex = elements.findIndex(el => el.id === overId);
         if (overElementIndex === -1) {
-          throw new Error("Element not found: ");
+          throw new Error("Element not found!");
         }
         let indexForNewElement = overElementIndex;
         if (isDroppingOverDesignerElementBottom) {
@@ -52,8 +52,26 @@ function Designer() {
         addElement(indexForNewElement, newElement);
         return;
       }
-    }
-  })
+      const isDraggingDesignerElement = active.data?.current?.isDesignerElement;
+      const draggingDesignerElementOverAnotherElement = isDroppingOverDesignerElement && isDraggingDesignerElement;
+      if (draggingDesignerElementOverAnotherElement) {
+        const activeId = active.data?.current?.elementId;
+        const overId = over.data?.current?.elementId;
+        const activeElementIndex = elements.findIndex(el => el.id === activeId);
+        const overElementIndex = elements.findIndex(el => el.id === overId);
+        if (activeElementIndex === -1 || overElementIndex === -1) {
+          throw new Error('Element not found');
+        }
+        const activeElement = { ...elements[activeElementIndex] };
+        removeElement(activeId);
+        let indexForNewElement = overElementIndex;
+        if (isDroppingOverDesignerElementBottom) {
+          indexForNewElement = overElementIndex + 1;
+        }
+        addElement(indexForNewElement, activeElement);
+      }
+    },
+  });
   return (
     <div className='flex w-full h-full'>
       <div className="w-full p-4" onClick={() => {
@@ -61,7 +79,7 @@ function Designer() {
       }}>
         <div ref={droppable.setNodeRef}
           className={cn("max-w-[920px] bg-background h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
-            droppable.isOver && "ring-2 ring-primary/20")}>
+            droppable.isOver && "ring-4 ring-inset ring-primary")}>
           {!droppable.isOver && elements.length === 0 && (
             <p className="sm:text-2xl text-muted-foreground text-center px-2 flex flex-grow items-center font-bold">Drop elements here to build a form</p>
           )}
