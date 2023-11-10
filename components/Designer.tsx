@@ -24,10 +24,33 @@ function Designer() {
       if (!active || !over) return;
 
       const isDesignerButtonElement = active.data?.current?.isDesignerButtonElement;
-      if (isDesignerButtonElement) {
+      const isDroppingOverDesignerDropArea = over.data?.current?.isDesignerDropArea;
+
+      const droppingSidebarButtonOverDropArea = isDesignerButtonElement && isDroppingOverDesignerDropArea;
+      if (droppingSidebarButtonOverDropArea) {
         const type = active.data?.current?.type;
         const newElement = FormElements[type as ElementsType].construct(idGenerator());
-        addElement(0, newElement);
+        addElement(elements.length, newElement);
+        return;
+      }
+      const isDroppingOverDesignerElementTop = over.data?.current?.isTopHalfDesigner;
+      const isDroppingOverDesignerElementBottom = over.data?.current?.isBottomHalfDesigner;
+      const isDroppingOverDesignerElement = isDroppingOverDesignerElementTop || isDroppingOverDesignerElementBottom;
+      const droppingSidebarButtonOverDesignerElement = isDesignerButtonElement && isDroppingOverDesignerElement;
+      if (droppingSidebarButtonOverDesignerElement) {
+        const type = active.data?.current?.type;
+        const newElement = FormElements[type as ElementsType].construct(idGenerator());
+        const overId = over.data?.current?.elementId;
+        const overElementIndex = elements.findIndex(el => el.id === overId);
+        if (overElementIndex === -1) {
+          throw new Error("Element not found: ");
+        }
+        let indexForNewElement = overElementIndex;
+        if (isDroppingOverDesignerElementBottom) {
+          indexForNewElement = overElementIndex + 1;
+        }
+        addElement(indexForNewElement, newElement);
+        return;
       }
     }
   })
