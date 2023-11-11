@@ -2,8 +2,8 @@ import React from 'react'
 import { Button } from './ui/button'
 import { MdPreview } from 'react-icons/md'
 import useDesigner from './hooks/useDesigner'
-import { Dialog } from './ui/dialog';
-import { DialogContent, DialogTrigger } from '@radix-ui/react-dialog';
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
+import { FormElements } from './FormElement';
 
 function PreviewDialogButton() {
   const { elements } = useDesigner();
@@ -20,6 +20,17 @@ function PreviewDialogButton() {
           <p className='text-lg font-bold text-muted-foreground'>
             Form Preview
           </p>
+          <p className="text-sm text-muted-foreground">
+            This is how your form will look like to your users.
+          </p>
+        </div>
+        <div className="bg-accent flex flex-col flex-grow items-center justify-center p-4 bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)] overflow-y-auto">
+          <div className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background h-full w-full rounded-3xl p-8 overflow-y-auto">
+            {elements.map((element, index) => {
+              const FormComponent = FormElements[element.type].formComponent;
+              return <FormComponent key={index} elementInstance={element} />
+            })}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -37,7 +37,8 @@ export const TextFieldFormElement: FormElement = {
         label: "Text Field",
     },
     designerComponent: DesignerComponent,
-    formComponent: () => <div className="text-white">Form Component</div>,
+    //@ts-ignore
+    formComponent: FormComponent,
     propertiesComponent: PropertiesComponent,
 }
 
@@ -54,6 +55,19 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
             <Label className="flex items-start gap-2">{label}{required && <p className="text-xs text-muted-foreground">*mandatory</p>}
             </Label>
             <Input readOnly disabled placeholder={placeholder} />
+            {helperText && <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>}
+        </div>
+    )
+}
+
+function FormComponent({ elementInstance }: { elementInstance: FormElementInstance }) {
+    const element = elementInstance as CustomInstance
+    const { label, required, placeholder, helperText } = element.extraAttributes;
+    return (
+        <div className="flex flex-col gap-2 w-full">
+            <Label className="flex items-start gap-2">{label}{required && <p className="text-xs text-muted-foreground">*mandatory</p>}
+            </Label>
+            <Input placeholder={placeholder} />
             {helperText && <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>}
         </div>
     )
@@ -95,7 +109,7 @@ function PropertiesComponent({ elementInstance }: { elementInstance: FormElement
                                     e.currentTarget.blur();
                                 }
                             }} />
-                       </FormControl>
+                        </FormControl>
                         <FormDescription>
                             The label of the Field. <br /> It will be displayed above the field.
                         </FormDescription>
