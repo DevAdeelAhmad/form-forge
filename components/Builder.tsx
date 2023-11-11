@@ -67,8 +67,8 @@ function Builder({ form }: { form: Form }) {
                         </Button>
                         <Button variant={"link"} asChild>
                             <Link href={`/forms/${form.id}`} className='gap-2'>
-                                <BsArrowRight />
                                 Form Details
+                                <BsArrowRight />
                             </Link>
                         </Button>
                     </div>
